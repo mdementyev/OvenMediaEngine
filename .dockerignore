@@ -1,0 +1,9 @@
+/.history
+/.vscode
+/dist
+/docs
+/.github
+/Dockerfile
+/.gitignore
+/Dockerfile.local
+/Dockerfile.intel

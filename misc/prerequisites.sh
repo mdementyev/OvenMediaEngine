@@ -120,7 +120,7 @@ install_libopenh264()
     #     PLATFORM="linux64"
     # else
     #     return
-    # fi 
+    # fi
 
     # (cd ${PREFIX}/lib && \
     # FILENAME=libopenh264-${OPENH264_VERSION}-${PLATFORM}.6.so && \
@@ -178,7 +178,7 @@ install_nasm()
 }
 
 install_nvcc_hdr() {
-    if [ "$NVIDIA_NV_CODEC_HWACCELS" = true ] ; then    
+    if [ "$NVIDIA_VIDEO_CODEC_HWACCELS" = true ] ; then
         (DIR=${TEMP_PATH}/nvcc-hdr && \
         mkdir -p ${DIR} && \
         cd ${DIR} && \
@@ -215,7 +215,7 @@ install_ffmpeg()
 
     # If there is an enable-qsv option, add libmfx
     if [ "$INTEL_QSV_HWACCELS" = true ] ; then
-        ADDI_LIBS+=" --enable-libmfx"
+        ADDI_LIBS+=" --enable-libmfx --enable-vaapi --enable-nonfree"
         ADDI_ENCODER+=",h264_qsv,hevc_qsv"
         ADDI_DECODER+=",vp8_qsv,h264_qsv,hevc_qsv"
         ADDI_HWACCEL=""
@@ -347,7 +347,7 @@ install_base_ubuntu()
 
 install_base_fedora()
 {
-    sudo yum install -y gcc-c++ make autoconf libtool zlib-devel tcl cmake bc libuuid-devel 
+    sudo yum install -y gcc-c++ make autoconf libtool zlib-devel tcl cmake bc libuuid-devel
     sudo yum install -y perl-IPC-Cmd
 }
 
@@ -404,7 +404,7 @@ fail_exit()
 
 check_version()
 {
-    if [[ "${OSNAME}" == "Ubuntu" && "${OSVERSION}" != "18" && "${OSVERSION}.${OSMINORVERSION}" != "20.04" ]]; then
+    if [[ "${OSNAME}" == "Ubuntu" && "${OSVERSION}" != "18" && "${OSVERSION}.${OSMINORVERSION}" != "20.04" && "${OSVERSION}.${OSMINORVERSION}" != "22.04" ]]; then
         proceed_yn
     fi
 
@@ -448,7 +448,7 @@ case $i in
     shift
     ;;
     --enable-qsv)
-    INTEL_QSV_HWACCELS=true  
+    INTEL_QSV_HWACCELS=true
     shift
     ;;
     --enable-nvc)
@@ -458,7 +458,7 @@ case $i in
     --enable-xma)
     XILINX_XMA_CODEC_HWACCELS=true
     shift
-    ;;    
+    ;;
     *)
             # unknown option
     ;;

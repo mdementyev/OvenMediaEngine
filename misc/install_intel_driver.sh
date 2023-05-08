@@ -110,6 +110,16 @@ install_base_ubuntu()
 {
     sudo apt install -y libdrm-dev xorg xorg-dev openbox libx11-dev libgl1-mesa-glx libgl1-mesa-dev
 
+    sudo apt-get install -y \
+        intel-media-va-driver-non-free \
+        libigfxcmrt7 \
+        libva-drm2 \
+        libva-x11-2 \
+        libmfx1 \
+        libmfx-dev \
+        libmfx-tools \
+        libva-dev
+
     echo "Reboot is required to use the new video driver."
 }
 
@@ -125,7 +135,7 @@ install_base_centos()
         sudo yum install -y libdrm-devel libX11-devel libXi-devel
 
     elif [[ "${OSVERSION}" == "8" ]]; then
-        
+
         sudo yum install -y libdrm-devel libX11-devel libXi-devel
 
     else
@@ -142,7 +152,7 @@ fail_exit()
 
 check_version()
 {
-    if [[ "${OSNAME}" == "Ubuntu" && "${OSVERSION}" != "18" && "${OSVERSION}" != "20" ]]; then
+    if [[ "${OSNAME}" == "Ubuntu" && "${OSVERSION}" != "18" && "${OSVERSION}" != "20" && "${OSVERSION}" != "22" ]]; then
         proceed_yn
     fi
 
